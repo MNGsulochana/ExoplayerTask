@@ -7,6 +7,7 @@ import com.hackathlon.exoplayertask.api.response.ModelList
 import com.hackathlon.exoplayertask.base.BasePresenter
 import com.hackathlon.exoplayertask.base.BaseRepository
 import com.hackathlon.exoplayertask.base.BaseView
+import com.hackathlon.exoplayertask.db.DatabaseManager
 
 interface HomeContract {
     interface View : BaseView

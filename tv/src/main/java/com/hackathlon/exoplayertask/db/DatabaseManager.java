@@ -37,7 +37,7 @@ public class DatabaseManager {
 
   }
 
-  public void  saveDataToREalm(DataModel d)
+  public void  saveDataToREalm(List<DataModel> d)
   {
     realm.beginTransaction();
     realm.copyToRealm(d);

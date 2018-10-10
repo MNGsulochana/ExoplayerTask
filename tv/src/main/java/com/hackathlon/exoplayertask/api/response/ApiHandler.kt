@@ -3,6 +3,7 @@ package com.hackathlon.exoplayertask.api.response
 import android.content.Context
 import android.util.Log
 import com.hackathlon.exoplayertask.api.request.ApiIntern
+import com.hackathlon.exoplayertask.db.DatabaseManager
 import com.hackathlon.exoplayertask.utils.Constants.AUTH_ERROR
 import org.json.JSONArray
 import org.json.JSONException
@@ -62,7 +63,8 @@ class ApiHandler(val context: Context, val api: ApiIntern, val retrofit: Retrofi
 
     fun getTheData(success: (List<DataModel>) -> Unit,
                    authFailure: (() -> Unit)?,
-                   error: (ApiError) -> Unit):
+                   error: (ApiError) -> Unit
+                   ):
 
             Call<ApiResponse<DataModel>>? {
 
@@ -91,6 +93,7 @@ class ApiHandler(val context: Context, val api: ApiIntern, val retrofit: Retrofi
                                 Log.d("mytb", "" + apiResponse.data.toString())
 
                                 success(apiResponse.list)
+                               // databaseManager.saveDataToREalm(apiResponse.list)
                             }
                         } else {
                             error(apiResponse.error!!)

@@ -1,6 +1,7 @@
 package com.hackathlon.exoplayertask.injection.module
 
 import com.hackathlon.exoplayertask.api.response.ApiHandler
+import com.hackathlon.exoplayertask.db.DatabaseManager
 import com.hackathlon.exoplayertask.injection.annotate.ActivityScope
 import com.hackathlon.exoplayertask.injection.annotate.FragmentScope
 
@@ -22,5 +23,5 @@ class FragmentPresenterModule {
 
     @FragmentScope
     @Provides
-    fun providesHomeRepository(apiHandler: ApiHandler): HomeContract.Repository = HomeRepository(apiHandler)
+    fun providesHomeRepository(apiHandler: ApiHandler,databaseManager: DatabaseManager): HomeContract.Repository = HomeRepository(apiHandler,databaseManager)
 }

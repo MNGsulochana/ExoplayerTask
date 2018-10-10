@@ -41,6 +41,7 @@ public class RowCardPresenter extends Presenter {
 
   public  RowCardPresenter(Context context) {
     this.context = context;
+//      databaseManager.getRealm();
 
   }
 
@@ -75,17 +76,21 @@ public class RowCardPresenter extends Presenter {
 
 
     DataModel dataModel= (DataModel) item;
-    modelRealmList.add(dataModel);
-     // Constants..add(dataModel);
+    if(dataModel!=null) {
 
-      for (DataModel b : modelRealmList) {
-          // Persist your data easily
-          databaseManager.saveDataToREalm(b);
-      }
+        modelRealmList.add(dataModel);
+        // Constants..add(dataModel);
 
-      Log.d("getdata",""+databaseManager.hasData());
+        for (DataModel b : modelRealmList) {
+            // Persist your data easily
+           // databaseManager.saveDataToREalm(b);
+        }
+    }
+    else {
+       // Log.d("getdata", "" + databaseManager.hasData());
 
-      Log.d("getdata","mSelectedMovie!!.image");
+        Log.d("getdatarealmnull", "mSelectedMovie!!.image");
+    }
    display(dataModel.getDescp(),dataModel.getImage(),dataModel.getVideourl(),dataModel.getTitle(),viewHolder.view);
 
 
