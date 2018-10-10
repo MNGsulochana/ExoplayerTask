@@ -1,4 +1,3 @@
-/*
 package com.hackathlon.exoplayertask.db;
 
 import android.support.annotation.NonNull;
@@ -6,11 +5,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Pair;
 
-import com.thundr.stb.model.Content;
-import com.thundr.stb.model.Continuity;
-import com.thundr.stb.model.Genre;
-import com.thundr.stb.model.GenreDb;
-import com.thundr.stb.model.PlayList;
+import com.hackathlon.exoplayertask.api.response.DataModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +16,8 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
-*/
-/**
- * saurav sharma on 8/17/2017.
- *
- * <p>Database Access helper for all locally stored information
- *//*
+
+
 
 public class DatabaseManager {
 
@@ -36,31 +28,30 @@ public class DatabaseManager {
     this.realm = realm;
   }
 
-  */
-/** Returns the realm database instance *//*
-
   public Realm getRealm() {
     return realm;
   }
 
+  public RealmResults<DataModel> getModellist() {
+      return realm.where(DataModel.class).findAll();
 
-
-
-
-  public void saveContinuity(List<Continuity> listener) {
-    if (realm != null) {
-      realm.beginTransaction();
-      realm.copyToRealmOrUpdate(listener);
-      realm.commitTransaction();
-    }
   }
 
+  public void  saveDataToREalm(DataModel d)
+  {
+    realm.beginTransaction();
+    realm.copyToRealm(d);
+    realm.commitTransaction();
+  }
+public boolean hasData()
+{
+  return  !realm.isEmpty();
+}
 
+   /* public boolean hasBooks() {
 
-
-
-
-
+    //    return !realm.allObjects(DataModel.class).isEmpty();
+    }
 
   public RealmResults<PlayList> getPlaylistList() {
     return realm.where(PlayList.class).findAll();
@@ -69,6 +60,8 @@ public class DatabaseManager {
   RealmResults<PlayList> getPlaylistObject(String objectid) {
     return realm.where(PlayList.class).equalTo(OBJECT_ID, objectid).findAll();
   }
+
+*/
 
 
 
@@ -84,7 +77,7 @@ public class DatabaseManager {
     }
   }
 
-  public void deleteContinuityObject(String objectid) {
+  /*public void deleteContinuityObject(String objectid) {
     if (realm != null) {
       realm.beginTransaction();
       for (Continuity continuity : getContinuityObject(objectid)) {
@@ -102,15 +95,14 @@ public class DatabaseManager {
     }
   }
 
-  */
-/**
+*
    * Saves the Sub genres of the primary genres in the table.<br>
    * Note: Sub genre will only be stored when the it is not previously saved.
    *
    * @param category Category like [TVSHOW/MUSIC]
    * @param primaryGenre Primary of the category [e.g., Entertainment]
    * @param subGenreList Sub {@link Genre} list from the API
-   *//*
+
 
   public void saveSubGenres(
       @NonNull String category, @NonNull String primaryGenre, @NonNull List<Genre> subGenreList) {
@@ -167,15 +159,14 @@ public class DatabaseManager {
     }
   }
 
-  */
-/**
+*
    * Saves the contents based on the Primary genre and/or Sub-Genre
    *
    * @param category Category like [TVSHOW/MUSIC]
    * @param primaryGenre Primary of the category [e.g., Entertainment]
    * @param subGenre Sub genre based on the primary genre [e.g., Action]
    * @param list {@link Content } list to be stored based on Primary genre and/or Sub genre
-   *//*
+
 
   public void saveContents(
       @NonNull String category,
@@ -271,6 +262,5 @@ public class DatabaseManager {
       }
     }
     return list;
-  }
+  }*/
 }
-*/

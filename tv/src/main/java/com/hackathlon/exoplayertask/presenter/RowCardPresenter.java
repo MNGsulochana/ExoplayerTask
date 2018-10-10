@@ -1,19 +1,29 @@
 package com.hackathlon.exoplayertask.presenter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v17.leanback.widget.Presenter;
+import android.support.v4.content.res.ResourcesCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hackathlon.exoplayertask.R;
 import com.hackathlon.exoplayertask.api.response.DataModel;
 import com.hackathlon.exoplayertask.api.response.ModelList;
+import com.hackathlon.exoplayertask.db.DatabaseManager;
+import com.hackathlon.exoplayertask.utils.Constants;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmList;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -22,9 +32,14 @@ import static android.view.View.VISIBLE;
 public class RowCardPresenter extends Presenter {
 
   private Context context;
-  ArrayList<ModelList> lis;
 
-  public RowCardPresenter(Context context) {
+  RealmList<DataModel> modelRealmList=new RealmList<>();
+    private DatabaseManager databaseManager;
+
+
+   //                 val playlistmodel: ArrayList<DataModel> = ArrayList()
+
+  public  RowCardPresenter(Context context) {
     this.context = context;
 
   }
@@ -33,7 +48,7 @@ public class RowCardPresenter extends Presenter {
   public ViewHolder onCreateViewHolder(ViewGroup parent) {
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content, parent, false);
-    view.setFocusable(true);
+  /*  view.setFocusable(true);
     view.setOnFocusChangeListener(
         new View.OnFocusChangeListener() {
           @Override
@@ -42,7 +57,15 @@ public class RowCardPresenter extends Presenter {
             if (hasFocus) infoView.setVisibility(VISIBLE);
             else infoView.setVisibility(GONE);
           }
-        });
+        });*/
+  view.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+          View infoView = view.findViewById(R.id.info_lay);
+           infoView.setVisibility(VISIBLE);
+
+      }
+  });
     return new ViewHolder(view);
 
   }
@@ -50,8 +73,20 @@ public class RowCardPresenter extends Presenter {
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, Object item) {
 
+
     DataModel dataModel= (DataModel) item;
-   display(dataModel.getDescp(),dataModel.getImage(),dataModel.getVideourl());
+    modelRealmList.add(dataModel);
+     // Constants..add(dataModel);
+
+      for (DataModel b : modelRealmList) {
+          // Persist your data easily
+          databaseManager.saveDataToREalm(b);
+      }
+
+      Log.d("getdata",""+databaseManager.hasData());
+
+      Log.d("getdata","mSelectedMovie!!.image");
+   display(dataModel.getDescp(),dataModel.getImage(),dataModel.getVideourl(),dataModel.getTitle(),viewHolder.view);
 
 
 
@@ -59,8 +94,17 @@ public class RowCardPresenter extends Presenter {
 
   }
 
-  private void display(String descp, String image, String videourl) {
+  private void display( String descp, String image_url, String videourl,String title, View view) throws NullPointerException {
+      Log.d("getdata","mSelectedMovie!!.image");
+      if(view==null)
+      {
+          Log.d("getdatanull","mSelectedMovie!!.image");
+      }
+    ImageView image = view.findViewById(R.id.posterimage);
 
+   TextView txtTitle = view.findViewById(R.id.txtTitle);
+   if (!TextUtils.isEmpty(title)) txtTitle.setText(title);
+      if (!TextUtils.isEmpty(image_url)) Glide.with(view.getContext()).load(image_url).centerCrop().into(image);
 
   }
 

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#fff">
+    android:focusable="true"
+    android:clickable="true"
+    android:background="#000">
 
 
     <ImageView
@@ -15,9 +17,8 @@
         android:id="@+id/info_lay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:padding="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/posterimage"
         app:layout_constraintEnd_toEndOf="@id/posterimage"
         app:layout_constraintStart_toStartOf="@id/posterimage">
@@ -28,30 +29,13 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
 
+                android:text="hiiiiiiiiiiiii"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/txtLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitle"
-            android:layout_marginEnd="10dp"
-            android:text="English"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/txtDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitle"
-            android:layout_toEndOf="@+id/txtLanguage"
-            android:text="52:00"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
 
     </RelativeLayout>
 

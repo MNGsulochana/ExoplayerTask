@@ -21,9 +21,9 @@
         android:logo="@drawable/app_icon_your_company"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,8 +47,10 @@
         <activity android:name=".DetailsActivity" />
         <activity android:name=".PlaybackActivity" />
         <activity android:name=".BrowseErrorActivity" />
-        <activity android:name=".ui.home.HomeActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ui.player.PlayerActivity"></activity>
     </application>
 
 </manifest>

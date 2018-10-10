@@ -5,6 +5,7 @@ import com.hackathlon.exoplayertask.injection.component.AppComponent
 import com.hackathlon.exoplayertask.injection.component.DaggerAppComponent
 import com.hackathlon.exoplayertask.injection.module.ApiModule
 import com.hackathlon.exoplayertask.injection.module.AppModule
+import com.hackathlon.exoplayertask.injection.module.CommonModule
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -12,7 +13,8 @@ class FireApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerAppComponent.builder().appModule(AppModule(this)).apiModule(ApiModule()).build()
+        component = DaggerAppComponent.builder().appModule(AppModule(this)).apiModule(ApiModule()).commonModule(CommonModule())
+                .build()
 
         Realm.init(this)
         val configuration = RealmConfiguration.Builder()
