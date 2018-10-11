@@ -15,8 +15,9 @@ class AppModule(val fireApp: FireApp) {
     fun providesApplication(): FireApp {
         return fireApp
     }
+
     @Singleton
     @Appcontext
     @Provides
-    fun providesAppContext() :Context = fireApp.applicationContext
+    fun providesAppContext(): Context = fireApp.applicationContext
 }

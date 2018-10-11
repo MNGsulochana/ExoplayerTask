@@ -3,20 +3,17 @@ package com.hackathlon.exoplayertask.presenter;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.RowHeaderView;
 import android.support.v17.leanback.widget.RowPresenter;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.TypedValue;
 
 import com.hackathlon.exoplayertask.R;
 
-
-
 public class CustomListRowPresenter extends ListRowPresenter {
+
+  private int mInitialSelectedPosition;
 
   public CustomListRowPresenter() {
     super();
   }
-
-  private int mInitialSelectedPosition;
 
   public CustomListRowPresenter(int position) {
     this.mInitialSelectedPosition = position;

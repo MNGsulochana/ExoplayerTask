@@ -2,59 +2,97 @@ package com.hackathlon.exoplayertask.presenter;
 
 import android.content.Context;
 import android.support.v17.leanback.widget.BaseCardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hackathlon.exoplayertask.R;
 import com.hackathlon.exoplayertask.api.response.DataModel;
-import com.hackathlon.exoplayertask.api.response.ModelList;
-import com.hackathlon.exoplayertask.ui.custom.VideoAbstractCardPresenter1;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
-import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class RowCardPResenterNew extends VideoAbstractCardPresenter1<BaseCardView> {
+public class RowCardPResenterNew extends VideoAbstractCardPresenter<BaseCardView> {
 
-    Realm realm;
-    public RowCardPResenterNew(@NotNull Context context) {
-        super(context);
+  Realm realm;
 
+  public RowCardPResenterNew(@NotNull Context context) {
+    super(context);
+  }
+
+  @NotNull
+  @Override
+  protected BaseCardView onCreateView() {
+
+    final BaseCardView cardView = new BaseCardView(getContext(), null, R.style.SideInfoCardStyle);
+    cardView.addView(LayoutInflater.from(getContext()).inflate(R.layout.item_content, null));
+    cardView.setFocusable(true);
+
+    /*     cardView.setOnFocusChangeListener(
+                 new View.OnFocusChangeListener() {
+                     @Override
+                     public void onFocusChange(View v, boolean hasFocus) {
+                         View infoView = v.findViewById(R.id.info_lay);
+                         if (hasFocus) infoView.setVisibility(VISIBLE);
+                         else infoView.setVisibility(GONE);
     }
+                 });*/
+    cardView.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            View infoView = view.findViewById(R.id.info_lay);
+            infoView.setVisibility(VISIBLE);
+          }
+        });
+    return cardView;
+  }
 
-    @NotNull
-    @Override
-    protected BaseCardView onCreateView() {
+  @Override
+  public void onBindViewHolder(@Nullable DataModel card, @NotNull BaseCardView cardView) {
 
-        final BaseCardView cardView = new BaseCardView(getContext());
-        cardView.addView(LayoutInflater.from(getContext()).inflate(R.layout.item_content, null));
-        cardView.setFocusable(true);
+    DataModel dataModel = (DataModel) card;
+    /* if(dataModel!=null) {
 
-        cardView.setOnFocusChangeListener(
-                new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        View infoView = v.findViewById(R.id.info_lay);
-                        if (hasFocus) infoView.setVisibility(VISIBLE);
-                        else infoView.setVisibility(GONE);
-   }
-                });
-        return cardView;
+        modelRealmList.add(dataModel);
+        // Constants..add(dataModel);
+
+        for (DataModel b : modelRealmList) {
+            // Persist your data easily
+            // databaseManager.saveDataToRealm(b);
+        }
     }
+    else {
+        // Log.d("getdata", "" + databaseManager.hasData());
 
-    @Override
-    public void onBindViewHolder(ModelList card, BaseCardView cardView) {
+        Log.d("getdatarealmnull", "mSelectedMovie!!.image");
+    }*/
+    display(
+        dataModel.getDescp(),
+        dataModel.getImage(),
+        dataModel.getVideourl(),
+        dataModel.getTitle(),
+        cardView);
+  }
 
-
-        Log.d("mineapp", "nBindViewHolder: a.... " +card.getModelList().size());
-
+  private void display(String descp, String image_url, String videourl, String title, View view)
+      throws NullPointerException {
+    Log.d("getdata", "mSelectedMovie!!.image");
+    if (view == null) {
+      Log.d("getdatanull", "mSelectedMovie!!.image");
     }
+    ImageView image = view.findViewById(R.id.posterimage);
 
-
+    TextView txtTitle = view.findViewById(R.id.txtTitle);
+    if (!TextUtils.isEmpty(title)) txtTitle.setText(title);
+    if (!TextUtils.isEmpty(image_url)) Glide.with(view.getContext()).load(image_url).into(image);
+  }
 }

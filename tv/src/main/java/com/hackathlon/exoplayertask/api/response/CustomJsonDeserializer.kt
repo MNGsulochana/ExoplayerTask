@@ -7,41 +7,41 @@ import java.lang.reflect.Type
 /** Mohan on 8/10/2017.  */
 class CustomJsonDeserializer<T : Any> : JsonDeserializer<ApiResponse<T>> {
 
-  private val gson = getGson()
+    private val gson = getGson()
 
-  @Throws(JsonParseException::class)
-  override fun deserialize(
-      element: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ApiResponse<T> {
-    var parseType: Type? = null
-    if (typeOfT is ParameterizedType) {
-      parseType = typeOfT.actualTypeArguments[0]
-    }
-    when {
-      element.isJsonArray -> {
-        val list = ArrayList<T>()
-        for (ele in element.asJsonArray) {
-          list.add(gson.fromJson(ele, parseType))
+    @Throws(JsonParseException::class)
+    override fun deserialize(
+            element: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ApiResponse<T> {
+        var parseType: Type? = null
+        if (typeOfT is ParameterizedType) {
+            parseType = typeOfT.actualTypeArguments[0]
         }
-        return ApiResponse(list)
-      }
-      element.isJsonObject -> {
-        val json = element.asJsonObject
-        return if (json.has("error")) {
-          val error = gson.fromJson(element, ApiError::class.java)
-          ApiResponse(error)
-        } else {
-          ApiResponse(gson.fromJson<T>(element, parseType))
+        when {
+            element.isJsonArray -> {
+                val list = ArrayList<T>()
+                for (ele in element.asJsonArray) {
+                    list.add(gson.fromJson(ele, parseType))
+                }
+                return ApiResponse(list)
+            }
+            element.isJsonObject -> {
+                val json = element.asJsonObject
+                return if (json.has("error")) {
+                    val error = gson.fromJson(element, ApiError::class.java)
+                    ApiResponse(error)
+                } else {
+                    ApiResponse(gson.fromJson<T>(element, parseType))
+                }
+            }
+            else -> return if ((element as JsonPrimitive).isString) {
+                ApiResponse(gson.fromJson<T>(element, parseType))
+            } else {
+                throw JsonParseException("Unsupported type of monument element")
+            }
         }
-      }
-      else -> return if ((element as JsonPrimitive).isString) {
-        ApiResponse(gson.fromJson<T>(element, parseType))
-      } else {
-        throw JsonParseException("Unsupported type of monument element")
-      }
     }
-  }
 
-  private fun getGson(): Gson {
-    return GsonBuilder().create()
-  }
+    private fun getGson(): Gson {
+        return GsonBuilder().create()
+    }
 }

@@ -5,7 +5,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.hackathlon.exoplayertask.api.request.ApiIntern
-import com.hackathlon.exoplayertask.api.response.*
+import com.hackathlon.exoplayertask.api.response.ApiHandler
+import com.hackathlon.exoplayertask.api.response.ApiResponse
+import com.hackathlon.exoplayertask.api.response.CustomJsonDeserializer
+import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.injection.annotate.Appcontext
 import com.hackathlon.exoplayertask.utils.Constants
 import dagger.Module
@@ -61,7 +64,7 @@ class ApiModule {
     @Provides
     fun providesGson(): Gson {
         return GsonBuilder()
-                .registerTypeAdapter(dataType,CustomJsonDeserializer<DataModel>())
+                .registerTypeAdapter(dataType, CustomJsonDeserializer<DataModel>())
                 .create()
     }
 

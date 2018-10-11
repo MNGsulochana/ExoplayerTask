@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 
 
 interface ToastMessage {
-  fun message(@StringRes message: Int)
+    fun message(@StringRes message: Int)
 
-  fun message(message: String)
+    fun message(message: String)
 }

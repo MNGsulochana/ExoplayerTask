@@ -5,13 +5,13 @@ import com.hackathlon.exoplayertask.base.BaseRepository
 import com.hackathlon.exoplayertask.base.BaseView
 
 interface SplashContract {
-    interface View : BaseView
-    {
-       fun callMainPAge()
+    interface View : BaseView {
+        fun callMainPAge()
     }
-    interface Presenter : BasePresenter<View>
-    {
+
+    interface Presenter : BasePresenter<View> {
         fun startTimer(view: View)
     }
+
     interface Repository : BaseRepository<Presenter>
 }

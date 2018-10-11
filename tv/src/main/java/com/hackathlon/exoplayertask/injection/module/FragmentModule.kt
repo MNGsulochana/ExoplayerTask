@@ -17,11 +17,11 @@ class FragmentModule(val context: Context) {
         return context
     }
 
-   /* @FragmentScope
-    @Provides
- fun providesFragmentContext() :Context
-    {
-        return context
-    }*/
+    /* @FragmentScope
+     @Provides
+  fun providesFragmentContext() :Context
+     {
+         return context
+     }*/
 
 }

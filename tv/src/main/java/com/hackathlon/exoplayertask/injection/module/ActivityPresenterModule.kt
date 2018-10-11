@@ -1,6 +1,7 @@
 package com.hackathlon.exoplayertask.injection.module
 
 import com.hackathlon.exoplayertask.api.response.ApiHandler
+import com.hackathlon.exoplayertask.db.DatabaseManager
 import com.hackathlon.exoplayertask.injection.annotate.ActivityScope
 import com.hackathlon.exoplayertask.ui.home.mvp.HomeContract
 import com.hackathlon.exoplayertask.ui.home.mvp.HomePresenter
@@ -28,18 +29,24 @@ class ActivityPresenterModule {
 
     @ActivityScope
     @Provides
-    fun providesPlayerPresenter(presenter : PlayerPresenter):PlayerContract.Presenter =presenter
+    fun providesHomeRepository(apiHandler: ApiHandler, databaseManager: DatabaseManager): HomeContract.Repository = HomeRepository(apiHandler, databaseManager)
 
     @ActivityScope
     @Provides
-    fun providesHomeRepository(apiHandler: ApiHandler) : PlayerContract.Repositor = PlayerRepository(apiHandler)
-
-
- /* @ActivityScope
-    @Provides
-    fun providesHomePresenter(presenter : HomePresenter):HomeContract.Presenter =presenter
+    fun providesHomePresenter(presenter: HomePresenter): HomeContract.Presenter = presenter
 
     @ActivityScope
     @Provides
-    fun providesHomeRepository(apiHandler: ApiHandler) : HomeContract.Repository = HomeRepository(apiHandler)*/
+    fun providesPlayerPresenter(presenter: PlayerPresenter): PlayerContract.Presenter = presenter
+
+    @ActivityScope
+    @Provides
+    fun providesPlayerRepository(apiHandler: ApiHandler, databaseManager: DatabaseManager): PlayerContract.Repositor = PlayerRepository(apiHandler, databaseManager)
+
+
+    /*
+
+       @ActivityScope
+       @Provides
+       fun providesHomeRepository(apiHandler: ApiHandler) : HomeContract.Repository = HomeRepository(apiHandler)*/
 }

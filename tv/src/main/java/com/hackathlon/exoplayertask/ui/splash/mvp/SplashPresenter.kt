@@ -1,10 +1,7 @@
 package com.hackathlon.exoplayertask.ui.splash.mvp
 
 import android.os.Handler
-import android.view.View
-import com.hackathlon.exoplayertask.base.BaseView
 import com.hackathlon.exoplayertask.base.PresenterImpl
-import com.hackathlon.exoplayertask.base.ToastMessage
 import javax.inject.Inject
 
 class SplashPresenter @Inject constructor(private val repository: SplashContract.Repository) : PresenterImpl<SplashContract.View>(), SplashContract.Presenter {
@@ -30,6 +27,6 @@ class SplashPresenter @Inject constructor(private val repository: SplashContract
     }
 
     companion object {
-        const val SPLASH_TIMEOUT : Long =1500
+        const val SPLASH_TIMEOUT: Long = 1500
     }
 }
