@@ -7,4 +7,8 @@
     <!--<item name="cardType">infoOver</item>-->
     <item name="cardBackground">@null</item>
     </style>
+
+    <style name="CharacterCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
 </resources>

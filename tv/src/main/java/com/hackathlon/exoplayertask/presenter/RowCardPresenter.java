@@ -38,18 +38,10 @@ public class RowCardPresenter extends Presenter {
   public ViewHolder onCreateViewHolder(ViewGroup parent) {
 
     final BaseCardView cardView = new BaseCardView(context, null, R.style.SideInfoCardStyle);
-    // cardView.addView();
-    // View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content, null,
-    // false);
 
     //  View view=LayoutInflater.inflate(R.layout.item_content, parent);
     View view = LayoutInflater.from(context).inflate(R.layout.item_content, parent, false);
 
-    // View view=LayoutInflater.from(context).inflate(R.layout.item_content,null);
-
-    /* if(view.getParent()!=null)
-    ((ViewGroup)view.getParent()).removeView(view);*/
-    // cardView.addView(view);
     /*  view.setFocusable(true);
     view.setOnFocusChangeListener(
         new View.OnFocusChangeListener() {

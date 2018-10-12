@@ -1,11 +1,13 @@
 package com.hackathlon.exoplayertask.ui.player.mvp
 
+import android.util.Log
 import com.hackathlon.exoplayertask.api.response.ApiHandler
 import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.RepositoryImpl
 import com.hackathlon.exoplayertask.db.DatabaseManager
 
 class PlayerRepository(private val apiHandler: ApiHandler, private val databaseManager: DatabaseManager) : RepositoryImpl<PlayerContract.Presenter>(), PlayerContract.Repositor {
+
 
     override fun getData(id: String): DataModel? {
         return databaseManager.getUnManagedData(id)
@@ -17,10 +19,13 @@ class PlayerRepository(private val apiHandler: ApiHandler, private val databaseM
     }
 
     override fun saveSeekTime(id: String, position: Long) {
+
+        Log.d("saveseek ", "$position..... $id")
         databaseManager.saveSeekPosition(id, position)
     }
 
     override fun getSeekTime(id: String): Long {
+        Log.d("getseek  ", "$id")
         return databaseManager.getSeekPosition(id)
     }
 

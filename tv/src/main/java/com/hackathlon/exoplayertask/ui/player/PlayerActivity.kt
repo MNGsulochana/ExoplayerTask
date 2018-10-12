@@ -35,6 +35,7 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
         View.OnClickListener, PlayListRowFragment.updateThePlaylist,
         PlayerControlView.VisibilityListener {
 
+
     companion object {
         const val ITEM_ID = "item_id"
     }
@@ -79,6 +80,7 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
         currentItem = presenter.getData(itemId)
 
         playerlistData = presenter.getDataList().toMutableList()
+
         playerlistData?.remove(currentItem)
         playerlistData?.add(0, currentItem!!)
 
@@ -124,6 +126,7 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
         player?.addListener(PlayerEventListener())
         mediaSource = ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(currentItem?.videourl))
 
+        Log.d("seektimeplayer",""+presenter.getSeekTime(currentItem?.id!!))
         player?.seekTo(presenter.getSeekTime(currentItem?.id!!))
         player?.prepare(mediaSource, false, false)
 
@@ -172,10 +175,12 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
     }
 
     override fun onBackPressed() {
+        Log.d("buffered_position","${player?.bufferedPosition}.........${player?.bufferedPercentage}")
         if (currentItem != null && player != null)
             presenter.saveSeekTime(currentItem?.id!!, player!!.currentPosition)
         super.onBackPressed()
     }
+
 
 
     /* private fun removeInstances(close: Boolean?) {
@@ -333,6 +338,9 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
                 -> progressBar!!.visibility = View.VISIBLE
                 Player.STATE_READY      // The player is able to immediately play
                 -> {
+
+
+
                     progressBar!!.visibility = View.GONE
                 }
                 Player.STATE_ENDED      // The player has finished playing the media

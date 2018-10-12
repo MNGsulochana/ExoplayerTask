@@ -69,6 +69,7 @@ public class CardPresenterNew extends Presenter {
 
     cardView.setTitleText(title);
 
+
     if (image != null) {
       // Set card size from dimension resources.
       Resources res = cardView.getResources();

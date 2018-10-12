@@ -33,7 +33,7 @@ public class RowCardPResenterNew extends VideoAbstractCardPresenter<BaseCardView
   protected BaseCardView onCreateView() {
 
     final BaseCardView cardView = new BaseCardView(getContext(), null, R.style.SideInfoCardStyle);
-    cardView.addView(LayoutInflater.from(getContext()).inflate(R.layout.item_content, null));
+    cardView.addView(LayoutInflater.from(getContext()).inflate(R.layout.character_card, null));
     cardView.setFocusable(true);
 
     /*     cardView.setOnFocusChangeListener(
@@ -45,14 +45,14 @@ public class RowCardPResenterNew extends VideoAbstractCardPresenter<BaseCardView
                          else infoView.setVisibility(GONE);
     }
                  });*/
-    cardView.setOnClickListener(
+    /*cardView.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             View infoView = view.findViewById(R.id.info_lay);
             infoView.setVisibility(VISIBLE);
           }
-        });
+        });*/
     return cardView;
   }
 
@@ -89,9 +89,9 @@ public class RowCardPResenterNew extends VideoAbstractCardPresenter<BaseCardView
     if (view == null) {
       Log.d("getdatanull", "mSelectedMovie!!.image");
     }
-    ImageView image = view.findViewById(R.id.posterimage);
+    ImageView image = view.findViewById(R.id.main_image);
 
-    TextView txtTitle = view.findViewById(R.id.txtTitle);
+    TextView txtTitle = view.findViewById(R.id.primary_text);
     if (!TextUtils.isEmpty(title)) txtTitle.setText(title);
     if (!TextUtils.isEmpty(image_url)) Glide.with(view.getContext()).load(image_url).into(image);
   }

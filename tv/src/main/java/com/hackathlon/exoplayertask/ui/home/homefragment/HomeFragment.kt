@@ -8,7 +8,9 @@ import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.BaseRowFragment
 import com.hackathlon.exoplayertask.injection.component.FragmentComponent
 import com.hackathlon.exoplayertask.presenter.CardPresenterNew
+import com.hackathlon.exoplayertask.presenter.CharacterCardPresenter
 import com.hackathlon.exoplayertask.presenter.CustomListRowPresenter
+import com.hackathlon.exoplayertask.presenter.RowCardPResenterNew
 import com.hackathlon.exoplayertask.ui.home.mvp.HomeContract
 import com.hackathlon.exoplayertask.ui.player.PlayerActivity
 import com.hackathlon.exoplayertask.ui.player.model.Playercontinuity
@@ -109,9 +111,17 @@ class HomeFragment : BaseRowFragment<HomeContract.Presenter>(), HomeContract.Vie
         }
     }
 
+
+
+
     override fun updateContinuityAdapter(getcontinutyList: List<DataModel>) {
         if (getcontinutyList.isNotEmpty()) {
-            val grid1 = CardPresenterNew()
+
+
+           // val grid1 = CardPresenterNew()
+           // val grid1=RowCardPResenterNew(activity)
+            val grid1=CharacterCardPresenter(activity)
+
             val gridRowAdapter = ArrayObjectAdapter(grid1)
             for (j in getcontinutyList) {
                 gridRowAdapter.add(j)

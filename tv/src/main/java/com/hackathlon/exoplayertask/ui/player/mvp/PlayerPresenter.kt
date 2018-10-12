@@ -11,6 +11,7 @@ class PlayerPresenter
 
     override fun attach(view: PlayerContract.View) {
         super.attach(view)
+
     }
 
     override fun getData(id: String): DataModel? {

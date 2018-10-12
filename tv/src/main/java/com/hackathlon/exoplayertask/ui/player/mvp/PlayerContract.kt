@@ -6,9 +6,7 @@ import com.hackathlon.exoplayertask.base.BaseRepository
 import com.hackathlon.exoplayertask.base.BaseView
 
 interface PlayerContract {
-    interface View : BaseView {
-
-    }
+    interface View : BaseView
 
     interface Presenter : BasePresenter<View> {
         fun getData(id: String): DataModel?
@@ -23,5 +21,6 @@ interface PlayerContract {
         fun getDataList(): List<DataModel>
         fun saveSeekTime(id: String, position: Long)
         fun getSeekTime(id: String): Long
+
     }
 }

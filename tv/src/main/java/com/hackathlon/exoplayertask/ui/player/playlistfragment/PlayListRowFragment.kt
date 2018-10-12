@@ -9,16 +9,13 @@ import android.view.View
 import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.BaseRowFragment1
 import com.hackathlon.exoplayertask.injection.component.FragmentComponent
+import com.hackathlon.exoplayertask.presenter.CardPresenterNew
 import com.hackathlon.exoplayertask.presenter.CustomListRowPresenter
 import com.hackathlon.exoplayertask.presenter.RowCardPresenter
 import com.hackathlon.exoplayertask.ui.player.playlistfragment.mvp.PlayListContract
 import com.hackathlon.exoplayertask.utils.Constants
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -74,9 +71,10 @@ class PlayListRowFragment : BaseRowFragment1<PlayListContract.Presenter>(), Play
     private fun loadPlaylist() {
 
         if (playlist != null) {
+            playlist?.removeAt(0)
             rowsadapter = ArrayObjectAdapter(CustomListRowPresenter())
             val header = HeaderItem(0, Constants.RELATED)
-            val listRowAdapter = ArrayObjectAdapter(RowCardPresenter(activity))
+            val listRowAdapter = ArrayObjectAdapter(CardPresenterNew())
             for (j in playlist?.indices!!) {
                 listRowAdapter.add(playlist?.get(j))
             }
