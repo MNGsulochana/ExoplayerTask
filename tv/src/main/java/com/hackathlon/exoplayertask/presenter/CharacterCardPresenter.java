@@ -24,18 +24,21 @@ import com.hackathlon.exoplayertask.api.response.DataModel;
  */
 public class CharacterCardPresenter extends AbstractCardPresenter<CharacterCardView> {
 
-    public CharacterCardPresenter(Context context) {
+    String type;
+    public CharacterCardPresenter(Context context,String type) {
         super(context);
+        this.type=type;
     }
 
     @Override
     protected CharacterCardView onCreateView() {
-        return new CharacterCardView(getContext());
+        return new CharacterCardView(getContext(),type);
     }
 
     @Override
     public void onBindViewHolder(DataModel card, CharacterCardView cardView) {
         cardView.updateUi(card,cardView);
+       // cardView.updateBackGroundColor(cardView,false);
     }
 
 

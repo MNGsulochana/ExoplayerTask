@@ -8,6 +8,13 @@ import javax.inject.Inject
 
 class PlayerPresenter
 @Inject constructor(@param:ScopeContext private val mContext: Context, private val repository: PlayerContract.Repositor) : PresenterImpl<PlayerContract.View>(), PlayerContract.Presenter {
+    override fun savePlayedPercentage(id: String, percentage: Int) {
+        repository.savePlayedPercentage(id,percentage)
+    }
+
+   /* override fun getPlayedPercentage(id: String): Int {
+       return repository.getPlayedPercentage(id)
+    }*/
 
     override fun attach(view: PlayerContract.View) {
         super.attach(view)

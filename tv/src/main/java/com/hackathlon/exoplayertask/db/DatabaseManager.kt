@@ -3,6 +3,7 @@ package com.hackathlon.exoplayertask.db
 import android.util.Log
 import com.hackathlon.exoplayertask.api.response.DataModel
 import io.realm.Realm
+import io.realm.RealmResults
 import io.realm.kotlin.where
 
 class DatabaseManager(val realm: Realm) {
@@ -27,7 +28,7 @@ class DatabaseManager(val realm: Realm) {
 
     fun getContinuityList(): List<DataModel> {
 
-        return realm.where<DataModel>().greaterThan("playedDuration", 0).findAll()
+        return realm.where<DataModel>().greaterThan("playedDuration", 0).greaterThan("played_percentage", 0).findAll()
     }
 
     fun getData(id: String): DataModel? {
@@ -57,6 +58,22 @@ class DatabaseManager(val realm: Realm) {
                 data.playedDuration = position
             Log.d("getduration", "" + data?.playedDuration)
         }
+    }
+
+    fun savePlayedPercentage(id : String ,percen : Int)
+    {
+        realm.executeTransaction{
+
+            val data=it.where<DataModel>().equalTo("id",id).findFirst()
+            if(data!=null)
+            {
+                data.played_percentage=percen
+            }
+        }
+    }
+    fun getPlayedPercentage() : RealmResults<DataModel>?
+    {
+       return realm.where<DataModel>().greaterThan("played_percentage", 0).findAll()
     }
 
 

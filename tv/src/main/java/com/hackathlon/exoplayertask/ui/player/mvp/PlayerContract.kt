@@ -13,6 +13,8 @@ interface PlayerContract {
         fun getDataList(): List<DataModel>
         fun getSeekTime(id: String): Long
         fun saveSeekTime(id: String, position: Long)
+        fun savePlayedPercentage(id : String ,percentage : Int)
+       // fun getPlayedPercentage(id : String) :Int
     }
 
     interface Repositor : BaseRepository<Presenter> {
@@ -21,6 +23,8 @@ interface PlayerContract {
         fun getDataList(): List<DataModel>
         fun saveSeekTime(id: String, position: Long)
         fun getSeekTime(id: String): Long
+        fun savePlayedPercentage(id : String ,percentage : Int)
+        //fun getPlayedPercentage(id : String) :Int
 
     }
 }

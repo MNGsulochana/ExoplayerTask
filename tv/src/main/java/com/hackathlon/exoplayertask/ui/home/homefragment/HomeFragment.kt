@@ -101,7 +101,8 @@ class HomeFragment : BaseRowFragment<HomeContract.Presenter>(), HomeContract.Vie
     override fun updateAdapter(list: List<DataModel>) {
 
         if (list.isNotEmpty()) {
-            val mGridPresenter = CardPresenterNew()
+           // val mGridPresenter = CardPresenterNew()
+            val mGridPresenter=CharacterCardPresenter(activity,"normal")
             val gridRowAdapter = ArrayObjectAdapter(mGridPresenter)
             for (i in list) {
                 gridRowAdapter.add(i)
@@ -118,9 +119,9 @@ class HomeFragment : BaseRowFragment<HomeContract.Presenter>(), HomeContract.Vie
         if (getcontinutyList.isNotEmpty()) {
 
 
-           // val grid1 = CardPresenterNew()
+          //  val grid1 = CardPresenterNew()
            // val grid1=RowCardPResenterNew(activity)
-            val grid1=CharacterCardPresenter(activity)
+          val grid1=CharacterCardPresenter(activity,"continuity")
 
             val gridRowAdapter = ArrayObjectAdapter(grid1)
             for (j in getcontinutyList) {

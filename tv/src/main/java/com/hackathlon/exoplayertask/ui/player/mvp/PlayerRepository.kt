@@ -7,6 +7,13 @@ import com.hackathlon.exoplayertask.base.RepositoryImpl
 import com.hackathlon.exoplayertask.db.DatabaseManager
 
 class PlayerRepository(private val apiHandler: ApiHandler, private val databaseManager: DatabaseManager) : RepositoryImpl<PlayerContract.Presenter>(), PlayerContract.Repositor {
+    override fun savePlayedPercentage(id: String, percentage: Int) {
+        databaseManager.savePlayedPercentage(id,percentage)
+    }
+
+    /*override fun getPlayedPercentage(id: String): Int {
+       return databaseManager.getPlayedPercentage(id)
+    }*/
 
 
     override fun getData(id: String): DataModel? {

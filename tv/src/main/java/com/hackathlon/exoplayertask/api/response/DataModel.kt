@@ -25,7 +25,7 @@ open class DataModel : RealmObject(), Serializable {
 
 
     var playedDuration: Long = 0
-//    var played_percentage : Int=0
+       var played_percentage : Int=0
 
     override fun hashCode(): Int {
         return id?.hashCode() ?: 0

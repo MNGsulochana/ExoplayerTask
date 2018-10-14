@@ -35,6 +35,7 @@ public class RowCardPResenterNew extends VideoAbstractCardPresenter<BaseCardView
     final BaseCardView cardView = new BaseCardView(getContext(), null, R.style.SideInfoCardStyle);
     cardView.addView(LayoutInflater.from(getContext()).inflate(R.layout.character_card, null));
     cardView.setFocusable(true);
+    cardView.setFocusableInTouchMode(true);
 
     /*     cardView.setOnFocusChangeListener(
                  new View.OnFocusChangeListener() {

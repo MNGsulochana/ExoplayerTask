@@ -3,6 +3,7 @@ package com.hackathlon.exoplayertask.ui.player
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -29,6 +30,7 @@ import com.hackathlon.exoplayertask.base.BaseActivity
 import com.hackathlon.exoplayertask.injection.component.ActivityComponent
 import com.hackathlon.exoplayertask.ui.player.mvp.PlayerContract
 import com.hackathlon.exoplayertask.ui.player.playlistfragment.PlayListRowFragment
+import java.util.concurrent.TimeUnit
 
 
 class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.View,
@@ -148,38 +150,14 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
 
     }
 
-    /*private fun setDataToDb(dataModel: DataModel) {
-        if (playerstate!!) {
-            Log.d("getseekpostion", "" + player?.currentPosition)
-            playercontinuity?.duration = player?.duration
-            playercontinuity?.position = player?.currentPosition
-            playercontinuity?.descp = mSelectedMovie?.descp
-            playercontinuity?.image = mSelectedMovie?.image
-            playercontinuity?.title_contn = mSelectedMovie?.title
-            playercontinuity?.videourl_cont = mSelectedMovie?.videourl
-            playercontinuity?.id = mSelectedMovie?.id
-            continutylist.add(playercontinuity)
 
-//            presenter.saveconitnutyData(continutylist)
-        } else if (continutylist.isNotEmpty()) {
-            Log.d("getcontintylistsize", "" + playerstate)
-            Log.d("getcontintylistsize", "" + continutylist.size)
-
-        }
-
-    }*/
 
     override fun onVisibilityChange(visibility: Int) {
         // removePlaylist()
 
     }
 
-    override fun onBackPressed() {
-        Log.d("buffered_position","${player?.bufferedPosition}.........${player?.bufferedPercentage}")
-        if (currentItem != null && player != null)
-            presenter.saveSeekTime(currentItem?.id!!, player!!.currentPosition)
-        super.onBackPressed()
-    }
+
 
 
 
@@ -286,11 +264,15 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
 
     private fun releasePlayer() {
         if (player != null) {
+            Log.d("playwnull","playernotnull")
             updateStartPosition()
             startAutoPlay = player?.getPlayWhenReady()!!
             player?.release()
             player = null
             trackSelector = null
+        }
+        else{
+            Log.d("playwnull","playernull")
         }
     }
 
@@ -306,27 +288,67 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
         if (Util.SDK_INT > 23 || player == null) {
             initializePlayer()
         }
-        getthePlayerState()
-    }
-
-    fun getthePlayerState() {
 
     }
+
 
     override fun onPause() {
         super.onPause()
-        if (Util.SDK_INT >= 23) {
+        if ( Util.SDK_INT>=23) {
+            Log.d("onpause","onpuse")
             releasePlayer()
         }
     }
 
     override fun onStop() {
         super.onStop()
-        if (Util.SDK_INT >= 23) {
+        if ( Util.SDK_INT>=23) {
             releasePlayer()
         }
     }
 
+    override fun onBackPressed() {
+        Log.d("buffered_position","${player?.bufferedPosition}.........${player?.bufferedPercentage}")
+        if (currentItem != null && player != null)
+            presenter.saveSeekTime(currentItem?.id!!, player!!.currentPosition)
+            presenter.savePlayedPercentage(currentItem?.id !!,player!!.bufferedPercentage)
+        super.onBackPressed()
+    }
+
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+
+        when(event?.keyCode)
+        {
+            KeyEvent.KEYCODE_DPAD_LEFT
+                    ->
+            {
+                //ToDo for rewind
+
+
+                //player.seekTo(player.getCurrentPosition() - 20000);
+
+               // onBackPressed()
+            }
+            KeyEvent.KEYCODE_DPAD_RIGHT
+                    ->
+                    {
+                        //ToDo for fast forward
+                        val TEN_SECONDS = TimeUnit.SECONDS.toMillis(10)
+                        var newPosition = player?.getCurrentPosition()!! - TEN_SECONDS
+                        newPosition = if (newPosition < 0) 0 else newPosition
+                        player?.seekTo(newPosition)
+                        // player.seekTo(player.getCurrentPosition() + 20000);
+                       // loadPlaylistFragment()
+                    }
+            KeyEvent.KEYCODE_BACK
+                    ->
+            {
+                onBackPressed()
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
     private inner class PlayerEventListener : Player.DefaultEventListener() {
 
 
@@ -338,9 +360,6 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
                 -> progressBar!!.visibility = View.VISIBLE
                 Player.STATE_READY      // The player is able to immediately play
                 -> {
-
-
-
                     progressBar!!.visibility = View.GONE
                 }
                 Player.STATE_ENDED      // The player has finished playing the media

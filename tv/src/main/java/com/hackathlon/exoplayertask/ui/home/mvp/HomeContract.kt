@@ -5,6 +5,7 @@ import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.BasePresenter
 import com.hackathlon.exoplayertask.base.BaseRepository
 import com.hackathlon.exoplayertask.base.BaseView
+import io.realm.RealmResults
 
 interface HomeContract {
 
@@ -21,6 +22,7 @@ interface HomeContract {
     interface Repository : BaseRepository<Presenter> {
 
         fun fetchContinuity(): List<DataModel>
+//        fun getPercentageData() : RealmResults<DataModel>?
 
         fun fetchVideoList(success: (List<DataModel>) -> Unit, error: (ApiError) -> Unit)
 
