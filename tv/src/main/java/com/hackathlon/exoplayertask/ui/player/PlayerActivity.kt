@@ -318,6 +318,7 @@ class PlayerActivity : BaseActivity<PlayerContract.Presenter>(), PlayerContract.
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
 
+      //  onKeyDown() either implement this method
         when(event?.keyCode)
         {
             KeyEvent.KEYCODE_DPAD_LEFT
