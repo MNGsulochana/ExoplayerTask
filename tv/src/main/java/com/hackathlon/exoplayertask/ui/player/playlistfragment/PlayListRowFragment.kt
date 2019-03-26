@@ -4,7 +4,7 @@ package com.hackathlon.exoplayertask.ui.player.playlistfragment
 import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
-import android.support.v17.leanback.widget.*
+import androidx.leanback.widget.*
 import android.view.View
 import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.BaseRowFragment1

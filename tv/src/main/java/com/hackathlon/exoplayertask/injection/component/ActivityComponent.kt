@@ -4,6 +4,7 @@ import com.hackathlon.exoplayertask.injection.annotate.ActivityScope
 import com.hackathlon.exoplayertask.injection.module.ActivityModule
 import com.hackathlon.exoplayertask.injection.module.ActivityPresenterModule
 import com.hackathlon.exoplayertask.ui.home.HomeActivity
+import com.hackathlon.exoplayertask.ui.leanback.LeanBackActivity
 import com.hackathlon.exoplayertask.ui.player.PlayerActivity
 
 import com.hackathlon.exoplayertask.ui.splash.SplashActivity
@@ -16,5 +17,6 @@ interface ActivityComponent {
     fun inject(splashActivity: SplashActivity)
     fun inject(homeActivity: HomeActivity)
     fun inject(playerActivity: PlayerActivity)
+    fun inject(leanBackActivity: LeanBackActivity)
 
 }

@@ -2,9 +2,13 @@ package com.hackathlon.exoplayertask.utils
 
 object Constants {
 
-    const val BASE_URL: String = "https://interview-e18de.firebaseio.com/"
+   /* const val BASE_URL: String = "https://interview-e18de.firebaseio.com/"
 
-    const val GET_DATA: String = "media.json?print=pretty"
+    const val GET_DATA: String = "media.json?print=pretty"*/
+
+    const val BASE_URL: String = "https://jsonplaceholder.typicode.com/"
+
+    const val GET_DATA: String = "posts"  //posts?_limit=10&_start=20
     const val PLAYLIST: String = "playlist"
     const val RELATED = "related"
 

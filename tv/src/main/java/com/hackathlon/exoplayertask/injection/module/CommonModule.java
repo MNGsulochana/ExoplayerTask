@@ -1,6 +1,6 @@
 package com.hackathlon.exoplayertask.injection.module;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hackathlon.exoplayertask.db.DatabaseManager;
 

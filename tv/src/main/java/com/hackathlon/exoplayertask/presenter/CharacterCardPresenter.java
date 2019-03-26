@@ -18,6 +18,7 @@ import android.content.Context;
 
 
 import com.hackathlon.exoplayertask.api.response.DataModel;
+import com.hackathlon.exoplayertask.ui.leanback.TestDataModel;
 
 /**
  * This Presenter is used to display the characters card row in the DetailView examples.
@@ -36,10 +37,15 @@ public class CharacterCardPresenter extends AbstractCardPresenter<CharacterCardV
     }
 
     @Override
+    public void onBindViewHolder(TestDataModel card, CharacterCardView cardView) {
+        cardView.updateUi(card,cardView);
+    }
+
+    /*@Override
     public void onBindViewHolder(DataModel card, CharacterCardView cardView) {
         cardView.updateUi(card,cardView);
        // cardView.updateBackGroundColor(cardView,false);
-    }
+    }*/
 
 
 }

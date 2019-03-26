@@ -2,37 +2,41 @@
 package com.hackathlon.exoplayertask.presenter;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
-import android.support.v17.leanback.widget.BaseCardView;
-import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.util.Log;
+import androidx.leanback.widget.BaseCardView;
+import androidx.leanback.widget.ImageCardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.request.RequestOptions;
 import com.hackathlon.exoplayertask.R;
-import com.hackathlon.exoplayertask.api.response.DataModel;
-import com.hackathlon.exoplayertask.utils.AspectRatioImageView;
+import com.hackathlon.exoplayertask.ui.leanback.TestDataModel;
 
+/**
+ * The type Character card view.
+ */
 public class CharacterCardView extends BaseCardView {
     private Drawable mDefaultCardImage;
     private int mSelectedBackgroundColor = -1;
     private int mDefaultBackgroundColor = -1;
+    /**
+     * The Type.
+     */
     String type;
 
+    /**
+     * Instantiates a new Character card view.
+     *
+     * @param context the context
+     * @param type    the type
+     */
     public CharacterCardView(Context context, String type) {
         super(context, null, R.style.CharacterCardStyle);
         mDefaultBackgroundColor =
@@ -76,7 +80,7 @@ public class CharacterCardView extends BaseCardView {
         view.findViewById(R.id.infolayout).setBackgroundColor(color);
     }
 
-    public void updateUi(DataModel card, CharacterCardView cardView) {
+    /*public void updateUi(DataModel card, CharacterCardView cardView) {
         TextView primaryText = (TextView) findViewById(R.id.primary_text);
         final ImageView imageView = (ImageView) findViewById(R.id.main_image);
         ProgressBar progressBar = findViewById(R.id.horizontal_progrssbar);
@@ -107,8 +111,20 @@ public class CharacterCardView extends BaseCardView {
                     .apply(RequestOptions.centerCropTransform())
                     .into(imageView);
         }
-    }
+    }*/
 
+
+    /**
+     * Update ui.
+     *
+     * @param card     the card
+     * @param cardView the card view
+     */
+    public void updateUi(TestDataModel card, CharacterCardView cardView) {
+        TextView primaryText = (TextView) findViewById(R.id.primary_text);
+        primaryText.setText(card.getTitle());
+
+    }
 
     /*public void updateBackGroundColor(CharacterCardView cardView,boolean selected) {
 

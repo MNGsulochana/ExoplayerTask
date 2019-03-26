@@ -6,6 +6,9 @@ import com.hackathlon.exoplayertask.injection.annotate.FragmentScope
 import com.hackathlon.exoplayertask.ui.home.mvp.HomeContract
 import com.hackathlon.exoplayertask.ui.home.mvp.HomePresenter
 import com.hackathlon.exoplayertask.ui.home.mvp.HomeRepository
+import com.hackathlon.exoplayertask.ui.leanback.mvp.LeanBackContract
+import com.hackathlon.exoplayertask.ui.leanback.mvp.LeanBackPresenter
+import com.hackathlon.exoplayertask.ui.leanback.mvp.LeanBackRepository
 import com.hackathlon.exoplayertask.ui.player.playlistfragment.mvp.PlayListContract
 import com.hackathlon.exoplayertask.ui.player.playlistfragment.mvp.PlayListPresenter
 import com.hackathlon.exoplayertask.ui.player.playlistfragment.mvp.PlayListRepositor
@@ -31,4 +34,15 @@ class FragmentPresenterModule {
     @FragmentScope
     @Provides
     fun providesPlayListRepository(apiHandler: ApiHandler): PlayListContract.Repository = PlayListRepositor(apiHandler)
+
+    @FragmentScope
+    @Provides
+    fun provideLEanbackPresenter(presenter: LeanBackPresenter):LeanBackContract.Presenter=presenter
+
+
+    @FragmentScope
+    @Provides
+    fun providesleanbackRepository(apiHandler: ApiHandler): LeanBackContract.Repository = LeanBackRepository(apiHandler)
+
+
 }

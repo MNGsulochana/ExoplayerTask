@@ -1,8 +1,8 @@
 package com.hackathlon.exoplayertask.presenter;
 
 import android.content.Context;
-import android.support.v17.leanback.widget.BaseCardView;
-import android.support.v17.leanback.widget.Presenter;
+import androidx.leanback.widget.BaseCardView;
+import androidx.leanback.widget.Presenter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +20,25 @@ import io.realm.RealmList;
 
 import static android.view.View.VISIBLE;
 
+/**
+ * The type Row card presenter.
+ */
 public class RowCardPresenter extends Presenter {
 
+  /**
+   * The Model realm list.
+   */
   RealmList<DataModel> modelRealmList = new RealmList<>();
   private Context context;
   private DatabaseManager databaseManager;
 
   //                 val playlistmodel: ArrayList<DataModel> = ArrayList()
 
+  /**
+   * Instantiates a new Row card presenter.
+   *
+   * @param context the context
+   */
   public RowCardPresenter(Context context) {
     this.context = context;
     //      databaseManager.getRealm();

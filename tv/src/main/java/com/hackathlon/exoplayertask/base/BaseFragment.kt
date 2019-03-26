@@ -7,7 +7,7 @@ import com.hackathlon.exoplayertask.injection.module.FragmentModule
 import com.hackathlon.exoplayertask.injection.module.FragmentPresenterModule
 import javax.inject.Inject
 
-abstract class BaseFragment<basePresenter : BasePresenter<*>> : android.support.v4.app.Fragment() {
+abstract class BaseFragment<basePresenter : BasePresenter<*>> : androidx.fragment.app.Fragment() {
     @Inject
     lateinit var presenter: basePresenter
 

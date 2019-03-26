@@ -28,9 +28,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+              <!--  <category android:name="android.intent.category.LAUNCHER" />-->
 
-               <!-- <category android:name="android.intent.category.LEANBACK_LAUNCHER" />-->
+              <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -38,6 +38,8 @@
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".ui.player.PlayerActivity"></activity>
+
+        <activity android:name=".ui.leanback.LeanBackActivity"/>
     </application>
 
 </manifest>

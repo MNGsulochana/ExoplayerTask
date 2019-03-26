@@ -1,6 +1,6 @@
 package com.hackathlon.exoplayertask.base
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 
 interface ToastMessage {

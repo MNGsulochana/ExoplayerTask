@@ -9,7 +9,9 @@ import com.hackathlon.exoplayertask.db.DatabaseManager
 import io.realm.RealmResults
 import retrofit2.Call
 
-class HomeRepository(private val apiHandler: ApiHandler, private val databaseManager: DatabaseManager) : RepositoryImpl<HomeContract.Presenter>(), HomeContract.Repository {
+class HomeRepository
+(private val apiHandler: ApiHandler, private val databaseManager: DatabaseManager)
+    : RepositoryImpl<HomeContract.Presenter>(), HomeContract.Repository {
    /* override fun getPercentageData(): RealmResults<DataModel>? {
         return databaseManager.getPlayedPercentage()
     }*/

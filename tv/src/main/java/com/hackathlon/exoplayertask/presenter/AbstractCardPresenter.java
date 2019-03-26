@@ -15,13 +15,13 @@ package com.hackathlon.exoplayertask.presenter;
 
 import android.content.Context;
 
-import android.support.v17.leanback.widget.BaseCardView;
-import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.Presenter;
+import androidx.leanback.widget.BaseCardView;
+import androidx.leanback.widget.ImageCardView;
+import androidx.leanback.widget.ListRowPresenter;
+import androidx.leanback.widget.Presenter;
 import android.view.ViewGroup;
 
-import com.hackathlon.exoplayertask.api.response.DataModel;
+import com.hackathlon.exoplayertask.ui.leanback.TestDataModel;
 
 /**
  * This abstract, generic class will create and manage the
@@ -50,11 +50,11 @@ public abstract class AbstractCardPresenter<T extends BaseCardView> extends Pres
         T cardView = onCreateView();
         return new ViewHolder(cardView);
     }
-
+/*
     @Override public final void onBindViewHolder(ViewHolder viewHolder, Object item) {
         DataModel card = (DataModel) item;
         onBindViewHolder(card, (T) viewHolder.view);
-    }
+    }*/
 
     @Override public final void onUnbindViewHolder(ViewHolder viewHolder) {
         onUnbindViewHolder((T) viewHolder.view);
@@ -62,6 +62,13 @@ public abstract class AbstractCardPresenter<T extends BaseCardView> extends Pres
 
     public void onUnbindViewHolder(T cardView) {
         // Nothing to clean up. Override if necessary.
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, Object item) {
+        TestDataModel model=(TestDataModel) item;
+        onBindViewHolder(model,(T)viewHolder.view);
+
     }
 
     /**
@@ -78,7 +85,8 @@ public abstract class AbstractCardPresenter<T extends BaseCardView> extends Pres
      * @param cardView The view the card is bound to.
      * @see Presenter#onBindViewHolder(Presenter.ViewHolder, Object)
      */
-    public abstract void onBindViewHolder(DataModel card, T cardView);
+   // public abstract void onBindViewHolder(DataModel card, T cardView);
 
+    public abstract void onBindViewHolder(TestDataModel card, T cardView);
 
 }

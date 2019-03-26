@@ -2,9 +2,9 @@ package com.hackathlon.exoplayertask.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v17.leanback.widget.ImageCardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.leanback.widget.ImageCardView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 

@@ -2,7 +2,7 @@ package com.hackathlon.exoplayertask.base
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v17.leanback.app.RowsFragment
+import androidx.leanback.app.RowsFragment
 import com.hackathlon.exoplayertask.injection.FireApp
 import com.hackathlon.exoplayertask.injection.component.FragmentComponent
 import com.hackathlon.exoplayertask.injection.module.FragmentModule

@@ -10,6 +10,7 @@ import com.hackathlon.exoplayertask.api.response.ApiResponse
 import com.hackathlon.exoplayertask.api.response.CustomJsonDeserializer
 import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.injection.annotate.Appcontext
+import com.hackathlon.exoplayertask.ui.leanback.TestDataModel
 import com.hackathlon.exoplayertask.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,8 @@ import java.lang.reflect.Type
 @Module
 class ApiModule {
 
-    private val dataType: Type = object : TypeToken<ApiResponse<DataModel>>() {}.type
+  //  private val dataType: Type = object : TypeToken<ApiResponse<DataModel>>() {}.type
+  private val dataType: Type = object : TypeToken<ApiResponse<TestDataModel>>() {}.type
 
     @Provides
     fun providesApiHandler(
@@ -61,12 +63,26 @@ class ApiModule {
     }
     //
 
-    @Provides
+    /*@Provides
     fun providesGson(): Gson {
         return GsonBuilder()
                 .registerTypeAdapter(dataType, CustomJsonDeserializer<DataModel>())
                 .create()
+    }*/
+
+    @Provides
+    fun providesGson(): Gson {
+        return GsonBuilder()
+                .registerTypeAdapter(dataType, CustomJsonDeserializer<TestDataModel>())
+                .create()
     }
+    /*@Provides
+    fun converter()
+    {
+        val collectionType = object : TypeToken<Collection<TestDataModel>>() {
 
-
+        }.type
+        val enums = providesGson().fromJson(yourJson, collectionType)
+    }
+*/
 }

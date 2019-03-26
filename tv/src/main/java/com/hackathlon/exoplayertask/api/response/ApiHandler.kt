@@ -3,6 +3,7 @@ package com.hackathlon.exoplayertask.api.response
 import android.content.Context
 import android.util.Log
 import com.hackathlon.exoplayertask.api.request.ApiIntern
+import com.hackathlon.exoplayertask.ui.leanback.TestDataModel
 import com.hackathlon.exoplayertask.utils.Constants.AUTH_ERROR
 import org.json.JSONArray
 import org.json.JSONException
@@ -92,6 +93,64 @@ class ApiHandler(val context: Context, val api: ApiIntern, val retrofit: Retrofi
                             else {
                                 Log.d("mytb", "" + apiResponse.data.toString())
 
+                                success(apiResponse.list)
+                                // databaseManager.saveDataToRealm(apiResponse.list)
+                            }
+                        } else {
+                            error(apiResponse.error!!)
+                        }
+                    } else {
+                        error(ApiError.noData())
+                    }
+                } else {
+                    if (response.code() == AUTH_ERROR) {
+                        authFailure?.invoke()
+                    } else {
+                        var apiError: ApiError? = null
+                        if (response.errorBody() != null) apiError = parseError(response)
+                        if (apiError == null)
+                            error(ApiError.noData())
+                    }
+                }
+
+            }
+        })
+
+        return call
+
+    }
+
+
+    fun getTheData1(limit:Int,start:Int,success: (List<TestDataModel>) -> Unit,
+                   authFailure: (() -> Unit)? = null,
+                   error: (ApiError) -> Unit
+    ):
+
+            Call<ApiResponse<TestDataModel>>? {
+
+        val call = api.getData1(limit.toString(),start.toString())
+
+        call.enqueue(object : Callback<ApiResponse<TestDataModel>> {
+            override fun onFailure(call: Call<ApiResponse<TestDataModel>>, t: Throwable) {
+                when (t) {
+                    is SSLException, is SocketException, is SocketTimeoutException, is UnknownHostException ->
+                        error(ApiError.noInternet())
+                    else -> {
+                        error(ApiError.error())
+                    }
+                }
+            }
+
+            override fun onResponse(call: Call<ApiResponse<TestDataModel>>, response: Response<ApiResponse<TestDataModel>>) {
+
+
+                if (response.isSuccessful) {
+                    val apiResponse = response.body()
+                    if (apiResponse != null) {
+                        if (!apiResponse.isError) {
+                            if (apiResponse.list?.isEmpty() == true)
+                                error(ApiError.noData())
+                            else {
                                 success(apiResponse.list)
                                 // databaseManager.saveDataToRealm(apiResponse.list)
                             }

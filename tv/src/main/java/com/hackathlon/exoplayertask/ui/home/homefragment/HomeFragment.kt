@@ -3,7 +3,7 @@ package com.hackathlon.exoplayertask.ui.home.homefragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v17.leanback.widget.*
+import androidx.leanback.widget.*
 import com.hackathlon.exoplayertask.api.response.DataModel
 import com.hackathlon.exoplayertask.base.BaseRowFragment
 import com.hackathlon.exoplayertask.injection.component.FragmentComponent
@@ -60,9 +60,9 @@ class HomeFragment : BaseRowFragment<HomeContract.Presenter>(), HomeContract.Vie
 
             if (item != null) {
 
-                val intent = Intent(activity, PlayerActivity::class.java)
+                val intent = Intent(context, PlayerActivity::class.java)
                 intent.putExtra(PlayerActivity.ITEM_ID, (item as DataModel).id)
-                activity.startActivity(intent)
+                context?.startActivity(intent)
 
 //                listRow = row as ListRow
 //

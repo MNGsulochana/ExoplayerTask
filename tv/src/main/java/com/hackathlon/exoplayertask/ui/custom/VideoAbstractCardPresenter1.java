@@ -1,8 +1,8 @@
 package com.hackathlon.exoplayertask.ui.custom;
 
 import android.content.Context;
-import android.support.v17.leanback.widget.BaseCardView;
-import android.support.v17.leanback.widget.Presenter;
+import androidx.leanback.widget.BaseCardView;
+import androidx.leanback.widget.Presenter;
 import android.view.ViewGroup;
 
 import com.hackathlon.exoplayertask.api.response.DataModel;
